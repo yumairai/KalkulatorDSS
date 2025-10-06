@@ -5,7 +5,6 @@ import time
 
 st.set_page_config(page_title="Aplikasi SPK: Kalkulator (SAW, AHP, WP, TOPSIS)", layout="wide")
 
-# ===== Sidebar =====
 with st.sidebar:
     st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
     st.image("logo-unpad1.png", width=180)
@@ -18,13 +17,11 @@ with st.sidebar:
     st.divider()
     method = st.selectbox("Pilih Metode:", ["SAW", "AHP", "WP", "TOPSIS"])
     st.divider()
-    st.caption("📘 Mode Edukasi — menampilkan langkah-langkah perhitungan secara detail.")
+    st.caption("📘 Kalkulator ini menampilkan langkah-langkah perhitungan secara detail.")
 
-# ===== Header =====
-st.markdown("<h2 style='text-align:center; color:#3949AB;'>🧮 DSS Edukasi — Langkah per Langkah</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align:center; color:#3949AB;'>🧮 Aplikasi SPK: Kalkulator — Langkah per Langkah</h2>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
-# ===== Input Data =====
 default_data = pd.DataFrame({
     "Alternatif": ["A1", "A2", "A3"],
     "C1": [70, 80, 90],
@@ -56,11 +53,9 @@ if method in ["SAW", "WP", "TOPSIS"]:
             t = st.selectbox(f"Tipe {c}", ["Benefit", "Cost"], key=f"type_{c}")
             types.append(t)
 
-# ===== Hasil Perhitungan =====
 with st.spinner("⏳ Sedang memproses langkah demi langkah..."):
     time.sleep(1)
 
-# === SAW ===
 if method == "SAW":
     st.header("🌟 Metode SAW (Simple Additive Weighting)")
     norm = np.zeros_like(values)
@@ -84,7 +79,6 @@ if method == "SAW":
     with st.expander("📙 Langkah 3: Hasil Akhir & Ranking", expanded=True):
         st.dataframe(result, use_container_width=True)
 
-# === AHP ===
 elif method == "AHP":
     st.header("🧠 Metode AHP (Analytic Hierarchy Process)")
     n = len(criteria)
@@ -126,7 +120,6 @@ elif method == "AHP":
 
 
 
-    # Pesan status
     if CR <= 0.1:
         st.success("✅ Matriks konsisten — nilai CR ≤ 0.1 menandakan perbandingan antar kriteria stabil.")
     else:
@@ -141,7 +134,6 @@ elif method == "AHP":
     with st.expander("📒 Langkah 4: Hasil Akhir"):
         st.dataframe(result, use_container_width=True)
 
-# === WP ===
 elif method == "WP":
     st.header("⚙️ Metode WP (Weighted Product)")
     norm = np.zeros_like(values)
@@ -165,7 +157,6 @@ elif method == "WP":
     with st.expander("📙 Langkah 3: Normalisasi Nilai S ke V", expanded=True):
         st.dataframe(result, use_container_width=True)
 
-# === TOPSIS ===
 elif method == "TOPSIS":
     st.header("🏆 Metode TOPSIS")
     norm = values / np.sqrt((values ** 2).sum(axis=0))
