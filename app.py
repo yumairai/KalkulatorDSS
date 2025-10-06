@@ -7,15 +7,12 @@ st.set_page_config(page_title="Aplikasi SPK: Kalkulator (SAW, AHP, WP, TOPSIS)",
 
 with st.sidebar:
     st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-    st.image("unpad_logo.png", width=100)  # ubah width-nya biar lebih kecil
-    st.markdown("""
-    <div style="text-align: center; font-family: 'Segoe UI', sans-serif;">
-        <h4 style="margin-bottom: 0; color: #2b3a8a;">Decision Support System</h4>
-        <p style="font-size: 13px; margin-top: 6px; margin-bottom: 2px;">by <b>Ayumi Fathiyaraisha</b></p>
-        <p style="font-size: 12px; margin: 0;">Teknik Informatika FMIPA</p>
-        <p style="font-size: 12px; margin: 0;">UNPAD</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.image("logo-unpad1.png", width=100)
+    st.markdown(
+        "<p style='text-align:center; color:#3949AB; font-weight:600; font-size:15px; margin-bottom:4px;'>Decision Support System</p>"
+        "<p style='text-align:center; font-size:12px; margin-top:0;'>by Ayumi Fathiyaraisha<br>Teknik Informatika FMIPA UNPAD</p>",
+        unsafe_allow_html=True
+    )
     st.markdown("</div>", unsafe_allow_html=True)
     st.divider()
     method = st.selectbox("Pilih Metode:", ["SAW", "AHP", "WP", "TOPSIS"])
