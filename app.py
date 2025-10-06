@@ -29,23 +29,41 @@ default_data = pd.DataFrame({
     "C3": [60, 65, 55]
 })
 st.subheader("Input Data Alternatif & Kriteria")
-data = st.data_editor(default_data, num_rows="dynamic", use_container_width=True)
-if st.button("➕ Tambah Kriteria"):
-    new_col = f"C{len([c for c in data.columns if c.startswith('C')]) + 1}"
-    data[new_col] = [0 for _ in range(len(data))]
-    st.session_state.data = data
-    st.rerun()
+# ====== Inisialisasi data hanya sekali ======
+if "data" not in st.session_state:
+    st.session_state.data = pd.DataFrame({
+        "Alternatif": ["A1", "A2", "A3"],
+        "C1": [70, 80, 90],
+        "C2": [85, 75, 95],
+        "C3": [60, 65, 55]
+    })
 
-# Simpan perubahan ke session_state
+data = st.session_state.data.copy()  # buat salinan supaya aman
+
+# ====== Tombol Tambah Kriteria ======
+col_btn = st.columns([1, 5])
+with col_btn[0]:
+    if st.button("➕ Tambah Kriteria"):
+        new_col = f"C{len([c for c in data.columns if c.startswith('C')]) + 1}"
+        data[new_col] = 0  # isi semua baris kolom baru dengan 0
+        st.session_state.data = data  # simpan ke session_state
+        st.rerun()
+
+# ====== Editor Tabel Dinamis ======
+data = st.data_editor(
+    data,
+    num_rows="dynamic",
+    use_container_width=True
+)
+
+# ====== Simpan perubahan terakhir ======
 st.session_state.data = data
 
-# Ambil nilai terbaru
+# ====== Ambil nilai terbaru ======
 alternatives = data["Alternatif"].tolist()
 criteria = [c for c in data.columns if c != "Alternatif"]
 values = data[criteria].to_numpy(dtype=float)
-alternatives = data["Alternatif"].tolist()
-criteria = [c for c in data.columns if c != "Alternatif"]
-values = data[criteria].to_numpy(dtype=float)
+
 
 
 # ===== Input Bobot & Tipe =====
