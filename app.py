@@ -113,7 +113,10 @@ elif method == "AHP":
 
     with st.expander("📙 Langkah 3: Uji Konsistensi", expanded=True):
         st.write(f"λmax = {lamda_max:.4f}, CI = {CI:.4f}, CR = {CR:.4f}")
-        st.success("✅ Matriks konsisten") if CR <= 0.1 else st.warning("⚠️ Matriks tidak konsisten")
+        if CR <= 0.1:
+            st.success("✅ Matriks konsisten")
+        else:
+            st.warning("⚠️ Matriks tidak konsisten")
 
     norm_alt = values / values.max(axis=0)
     final_scores = norm_alt.dot(w)
