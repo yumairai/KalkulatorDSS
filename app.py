@@ -46,7 +46,7 @@ data = st.data_editor(
     use_container_width=True
 )
 
-col_btn = st.columns([1, 5])
+col_btn = st.columns([1, 2])
 with col_btn[0]:
     if st.button("➕ Tambah Kriteria"):
         new_col = f"C{len([c for c in data.columns if c.startswith('C')]) + 1}"
