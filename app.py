@@ -6,18 +6,15 @@ import time
 st.set_page_config(page_title="Aplikasi SPK: Kalkulator (SAW, AHP, WP, TOPSIS)", layout="wide")
 
 with st.sidebar:
-    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <style>
-        [data-testid="stSidebar"] img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
+    st.sidebar.markdown(
+    """
+    <style>
+    [data-testid="stSidebar"] img {
+        margin-left: 40px; /* ubah nilai ini sesuai kebutuhan */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
     )
     st.image("logo-unpad1.png", width=100)
     st.markdown(
