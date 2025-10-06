@@ -288,13 +288,6 @@ if st.session_state.page == "guide":
     if st.button("⬅️ Kembali ke Halaman Utama"):
         st.session_state.page = "main"
 
-else:
-    # HALAMAN UTAMA (tempat kalkulator SAW, AHP, WP, TOPSIS)
-    st.markdown("<h2 style='text-align:center; color:#3949AB;'>🧮 Aplikasi SPK: Kalkulator — Langkah per Langkah</h2>", unsafe_allow_html=True)
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # ... (lanjutkan kode kalkulator kamu seperti biasa)
-
 st.markdown(
     "<hr><center><p style='font-size:14px;'>© 2025 Ayumi Fathiyaraisha | Aplikasi SPK: Kalkulator (SAW, AHP, WP, TOPSIS)</p></center>",
     unsafe_allow_html=True
