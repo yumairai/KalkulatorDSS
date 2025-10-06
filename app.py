@@ -39,9 +39,6 @@ if "data" not in st.session_state:
     })
 
 data = st.session_state.data.copy()  # buat salinan supaya aman
-
-# ====== Tombol Tambah Kriteria ======
-
 # ====== Editor Tabel Dinamis ======
 data = st.data_editor(
     data,
@@ -55,6 +52,15 @@ with col_btn[0]:
         new_col = f"C{len([c for c in data.columns if c.startswith('C')]) + 1}"
         data[new_col] = 0  # isi semua baris kolom baru dengan 0
         st.session_state.data = data  # simpan ke session_state
+        st.rerun()
+
+criteria_cols = [c for c in data.columns if c != "Alternatif"]
+selected_col = st.selectbox("Pilih kolom untuk dihapus:", criteria_cols)
+
+if st.button("🗑️ Hapus Kolom Terpilih"):
+    if selected_col:
+        data.drop(columns=selected_col, inplace=True)
+        st.session_state.data = data
         st.rerun()
 
 # ====== Simpan perubahan terakhir ======
