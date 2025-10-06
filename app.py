@@ -113,10 +113,30 @@ elif method == "AHP":
 
     with st.expander("📙 Langkah 3: Uji Konsistensi", expanded=True):
         st.write(f"λmax = {lamda_max:.4f}, CI = {CI:.4f}, CR = {CR:.4f}")
-        if CR <= 0.1:
-            st.success("✅ Matriks konsisten")
-        else:
-            st.warning("⚠️ Matriks tidak konsisten")
+
+        # Indikator visual CR
+        st.markdown("**Indikator Rasio Konsistensi (CR):**")
+        progress_color = "#4CAF50" if CR <= 0.1 else "#E53935"
+        progress_percent = min(CR / 0.2, 1.0)  # scale 0–0.2 ke 0–1
+
+        st.markdown(
+            f"""
+            <div style='width:100%; background-color:#E0E0E0; border-radius:10px;'>
+                <div style='width:{progress_percent*100:.1f}%; background-color:{progress_color};
+                            padding:5px; border-radius:10px; text-align:center; color:white;'>
+                    CR = {CR:.4f}
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    # Pesan status
+    if CR <= 0.1:
+        st.success("✅ Matriks konsisten — nilai CR ≤ 0.1 menandakan perbandingan antar kriteria stabil.")
+    else:
+        st.warning("⚠️ Matriks tidak konsisten — CR > 0.1, disarankan revisi perbandingan antar kriteria.")
+
 
     norm_alt = values / values.max(axis=0)
     final_scores = norm_alt.dot(w)
