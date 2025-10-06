@@ -121,15 +121,17 @@ elif method == "AHP":
 
         st.markdown(
             f"""
-            <div style='width:100%; background-color:#E0E0E0; border-radius:10px;'>
+            <div style='width:100%; background-color:#E0E0E0; border-radius:10px; height:22px;'>
                 <div style='width:{progress_percent*100:.1f}%; background-color:{progress_color};
-                            padding:5px; border-radius:10px; text-align:center; color:white;'>
+                            height:22px; border-radius:10px; text-align:center;
+                            line-height:22px; color:white; font-weight:bold;'>
                     CR = {CR:.4f}
                 </div>
             </div>
             """,
             unsafe_allow_html=True
         )
+
 
     # Pesan status
     if CR <= 0.1:
