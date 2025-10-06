@@ -33,6 +33,7 @@ with st.sidebar:
     method = st.selectbox("Pilih Metode:", ["SAW", "AHP", "WP", "TOPSIS"])
     st.divider()
     st.caption("Kalkulator ini menampilkan langkah-langkah perhitungan secara detail.")
+    st.markdown("<a href='?page=guide' target='_self'>📘 User Guide</a>", unsafe_allow_html=True)
     if st.session_state.page == "main":
         st.title("Decision Support System")
         st.write("Silakan pilih metode dari sidebar untuk memulai.")
