@@ -6,7 +6,14 @@ import time
 st.set_page_config(page_title="DSS Calculator (SAW, AHP, WP, TOPSIS)", layout="wide")
 
 with st.sidebar:
-    st.image("logo-unpad1.png", width=100)
+    st.markdown(
+        """
+        <div style="text-align: center;">
+            <img src="logo-unpad1.png" width="200">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     st.title("🎓 DSS Calculator")
     st.caption("by **Ayumi Fathiyaraisha** — Teknik Informatika FMIPA UNPAD")
     st.divider()
