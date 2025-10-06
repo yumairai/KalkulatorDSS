@@ -33,6 +33,31 @@ data = st.data_editor(default_data, num_rows="dynamic", use_container_width=True
 alternatives = data["Alternatif"].tolist()
 criteria = [c for c in data.columns if c != "Alternatif"]
 values = data[criteria].to_numpy(dtype=float)
+st.subheader("Input Data Alternatif & Kriteria")
+
+# Data default
+if "data" not in st.session_state:
+    st.session_state.data = pd.DataFrame({
+        "Alternatif": ["A1", "A2", "A3"],
+        "C1": [70, 80, 90],
+        "C2": [85, 75, 95],
+        "C3": [60, 65, 55]
+    })
+
+data = st.session_state.data
+
+# tampilkan editor
+data = st.data_editor(data, num_rows="dynamic", use_container_width=True)
+
+# tombol untuk tambah kolom
+if st.button("➕ Tambah Kriteria"):
+    new_col = f"C{len(data.columns)}"
+    data[new_col] = [0 for _ in range(len(data))]
+    st.session_state.data = data  # simpan ke session_state
+    st.rerun()  # refresh supaya kolom baru muncul
+
+st.session_state.data = data
+
 
 # ===== Input Bobot & Tipe =====
 if method in ["SAW", "WP", "TOPSIS"]:
