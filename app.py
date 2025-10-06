@@ -7,7 +7,14 @@ st.set_page_config(page_title="Aplikasi SPK: Kalkulator (SAW, AHP, WP, TOPSIS)",
 
 with st.sidebar:
     st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-    st.image("logo-unpad1.png", width=100)
+    st.markdown(
+    """
+    <div style='text-align: center;'>
+        <img src='logo-unpad1.png' width='100'>
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
     st.markdown(
         "<p style='text-align:center; color:#3949AB; font-weight:600; font-size:15px; margin-bottom:4px;'>Decision Support System</p>"
         "<p style='text-align:center; font-size:12px; margin-top:0;'>by Ayumi Fathiyaraisha<br>Teknik Informatika FMIPA UNPAD</p>",
