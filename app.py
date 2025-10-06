@@ -47,6 +47,7 @@ alternatives = data["Alternatif"].tolist()
 criteria = [c for c in data.columns if c != "Alternatif"]
 values = data[criteria].to_numpy(dtype=float)
 
+
 # ===== Input Bobot & Tipe =====
 if method in ["SAW", "WP", "TOPSIS"]:
     st.subheader("Bobot & Jenis Kriteria")
