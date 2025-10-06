@@ -33,25 +33,11 @@ with st.sidebar:
     method = st.selectbox("Pilih Metode:", ["SAW", "AHP", "WP", "TOPSIS"])
     st.divider()
     st.caption("Kalkulator ini menampilkan langkah-langkah perhitungan secara detail.")
-    if st.button("📘 User Guide", use_container_width=True):
-        go_to("guide")
-    if st.button("⬅️ Kembali ke Halaman Utama"):
-        go_to("main")
-    if st.session_state.page == "main":
-        st.write("Silakan pilih metode dari sidebar untuk memulai.")
-    elif st.session_state.page == "guide":
-        st.title("📘 User Guide – Panduan Penggunaan")
-        st.markdown("""
-        Berikut langkah-langkah menggunakan aplikasi ini:
-        
-        1. Pilih **metode DSS** di sidebar (misalnya: SAW, AHP, WP, atau TOPSIS).
-        2. Masukkan **data alternatif dan kriteria** pada tabel yang tersedia.
-        3. Klik tombol **Proses** untuk melihat hasil perhitungan.
-        4. Kamu bisa kembali ke halaman utama dengan tombol di bawah.
-        """)
-        
-        if st.button("⬅️ Kembali ke Halaman Utama"):
-            go_to("main")
+    if st.button("📘 User Guide"):
+        st.session_state.page = "guide"
+
+        st.divider()
+        st.caption("Masukkan data alternatif & kriteria, lalu pilih metode untuk menghitung langkah demi langkah.")    if st.session_state.page == "main":
 
 st.markdown("<h2 style='text-align:center; color:#3949AB;'>🧮 Aplikasi SPK: Kalkulator — Langkah per Langkah</h2>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
@@ -270,6 +256,43 @@ elif method == "TOPSIS":
 
     with st.expander("📔 Langkah 5: Hasil Akhir & Ranking", expanded=True):
         st.dataframe(result, use_container_width=True)
+
+
+if st.session_state.page == "guide":
+    # HALAMAN USER GUIDE (muncul di area utama, bukan sidebar)
+    st.markdown("<h2 style='text-align:center; color:#3949AB;'>📘 Panduan Penggunaan Aplikasi</h2>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    st.markdown("""
+    <div style='background-color:#F5F5F5; padding:25px; border-radius:15px; max-width:850px; margin:auto;'>
+        <h4>🧩 Langkah-langkah:</h4>
+        <ol>
+            <li>Pilih metode DSS di sidebar (SAW, AHP, WP, atau TOPSIS).</li>
+            <li>Masukkan <b>data alternatif dan kriteria</b> pada tabel utama.</li>
+            <li>Gunakan tombol untuk menambah atau menghapus kriteria sesuai kebutuhan.</li>
+            <li>Isi bobot dan tipe (Benefit/Cost) untuk setiap kriteria.</li>
+            <li>Hasil perhitungan akan tampil bertahap dalam bentuk tabel.</li>
+        </ol>
+        <h4>📈 Penjelasan Metode:</h4>
+        <ul>
+            <li><b>SAW</b> – Menjumlahkan nilai terbobot hasil normalisasi.</li>
+            <li><b>AHP</b> – Menggunakan matriks perbandingan dan rasio konsistensi (CR).</li>
+            <li><b>WP</b> – Mengalikan nilai kriteria berpangkat bobot.</li>
+            <li><b>TOPSIS</b> – Menilai jarak alternatif terhadap solusi ideal positif & negatif.</li>
+        </ul>
+    </div>
+    <br>
+    """, unsafe_allow_html=True)
+
+    if st.button("⬅️ Kembali ke Halaman Utama"):
+        st.session_state.page = "main"
+
+else:
+    # HALAMAN UTAMA (tempat kalkulator SAW, AHP, WP, TOPSIS)
+    st.markdown("<h2 style='text-align:center; color:#3949AB;'>🧮 Aplikasi SPK: Kalkulator — Langkah per Langkah</h2>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # ... (lanjutkan kode kalkulator kamu seperti biasa)
 
 st.markdown(
     "<hr><center><p style='font-size:14px;'>© 2025 Ayumi Fathiyaraisha | Aplikasi SPK: Kalkulator (SAW, AHP, WP, TOPSIS)</p></center>",
