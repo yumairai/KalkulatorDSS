@@ -175,8 +175,16 @@ elif method == "TOPSIS":
             ideal_pos[j], ideal_neg[j] = V[:, j].min(), V[:, j].max()
 
     with st.expander("📙 Langkah 3: Solusi Ideal Positif & Negatif"):
-        st.write("Ideal Positif (+):", np.round(ideal_pos, 4))
-        st.write("Ideal Negatif (-):", np.round(ideal_neg, 4))
+        st.write("Berikut solusi ideal untuk masing-masing kriteria:")
+
+        ideal_df = pd.DataFrame({
+            "Kriteria": criteria,
+            "Ideal Positif (+)": np.round(ideal_pos, 4),
+            "Ideal Negatif (−)": np.round(ideal_neg, 4)
+        })
+
+        st.dataframe(ideal_df, use_container_width=True)
+
 
     D_pos = np.sqrt(((V - ideal_pos) ** 2).sum(axis=1))
     D_neg = np.sqrt(((V - ideal_neg) ** 2).sum(axis=1))
