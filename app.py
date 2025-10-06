@@ -4,6 +4,12 @@ import pandas as pd
 import time
 
 st.set_page_config(page_title="Aplikasi SPK: Kalkulator (SAW, AHP, WP, TOPSIS)", layout="wide")
+if "page" not in st.session_state:
+    st.session_state.page = "main"
+
+# --- Fungsi pindah halaman ---
+def go_to(page_name):
+    st.session_state.page = page_name
 
 with st.sidebar:
     st.sidebar.markdown(
@@ -26,7 +32,25 @@ with st.sidebar:
     st.divider()
     method = st.selectbox("Pilih Metode:", ["SAW", "AHP", "WP", "TOPSIS"])
     st.divider()
-    st.caption("📘 Kalkulator ini menampilkan langkah-langkah perhitungan secara detail.")
+    st.caption("Kalkulator ini menampilkan langkah-langkah perhitungan secara detail.")
+    if st.session_state.page == "main":
+        st.title("Decision Support System")
+        st.write("Silakan pilih metode dari sidebar untuk memulai.")
+
+    # --- Halaman User Guide ---
+    elif st.session_state.page == "guide":
+        st.title("📘 User Guide – Panduan Penggunaan")
+        st.markdown("""
+        Berikut langkah-langkah menggunakan aplikasi ini:
+        
+        1. Pilih **metode DSS** di sidebar (misalnya: SAW, AHP, WP, atau TOPSIS).
+        2. Masukkan **data alternatif dan kriteria** pada tabel yang tersedia.
+        3. Klik tombol **Proses** untuk melihat hasil perhitungan.
+        4. Kamu bisa kembali ke halaman utama dengan tombol di bawah.
+        """)
+        
+        if st.button("⬅️ Kembali ke Halaman Utama"):
+            go_to("main")
 
 st.markdown("<h2 style='text-align:center; color:#3949AB;'>🧮 Aplikasi SPK: Kalkulator — Langkah per Langkah</h2>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
