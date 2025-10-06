@@ -10,7 +10,7 @@ with st.sidebar:
     """
     <style>
     [data-testid="stSidebar"] img {
-        margin-left: 40px; /* ubah nilai ini sesuai kebutuhan */
+        margin-left: 50px; /* ubah nilai ini sesuai kebutuhan */
     }
     </style>
     """,
