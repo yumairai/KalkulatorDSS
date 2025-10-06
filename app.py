@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import time
 
-st.set_page_config(page_title="DSS Edukasi (SAW, AHP, WP, TOPSIS)", layout="wide")
+st.set_page_config(page_title="Aplikasi SPK: Kalkulator (SAW, AHP, WP, TOPSIS)", layout="wide")
 
 # ===== Sidebar =====
 with st.sidebar:
@@ -114,23 +114,16 @@ elif method == "AHP":
     with st.expander("📙 Langkah 3: Uji Konsistensi", expanded=True):
         st.write(f"λmax = {lamda_max:.4f}, CI = {CI:.4f}, CR = {CR:.4f}")
 
-        # Indikator visual CR
-        st.markdown("**Indikator Rasio Konsistensi (CR):**")
-        progress_color = "#4CAF50" if CR <= 0.1 else "#E53935"
-        progress_percent = min(CR / 0.2, 1.0)  # scale 0–0.2 ke 0–1
+        st.write(f"λmax = {lamda_max:.4f}, CI = {CI:.4f}, CR = {CR:.4f}")
+        st.write("**Indikator Rasio Konsistensi (CR):**")
 
-        st.markdown(
-            f"""
-            <div style='width:100%; background-color:#E0E0E0; border-radius:10px; height:22px;'>
-                <div style='width:{progress_percent*100:.1f}%; background-color:{progress_color};
-                            height:22px; border-radius:10px; text-align:center;
-                            line-height:22px; color:white; font-weight:bold;'>
-                    CR = {CR:.4f}
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        cr_scaled = min(CR / 0.2, 1.0)
+        st.progress(1.0 - cr_scaled)  # semakin kecil CR, bar makin penuh (hijau)
+        if CR <= 0.1:
+            st.success("✅ Matriks konsisten — nilai CR ≤ 0.1")
+        else:
+            st.warning("⚠️ Matriks tidak konsisten — CR > 0.1")
+
 
 
     # Pesan status
@@ -207,6 +200,6 @@ elif method == "TOPSIS":
         st.dataframe(result, use_container_width=True)
 
 st.markdown(
-    "<hr><center><p style='font-size:14px;'>© 2025 Ayumi Fathiyaraisha | DSS Edukasi (SAW, AHP, WP, TOPSIS)</p></center>",
+    "<hr><center><p style='font-size:14px;'>© 2025 Ayumi Fathiyaraisha | Aplikasi SPK: Kalkulator (SAW, AHP, WP, TOPSIS)</p></center>",
     unsafe_allow_html=True
 )
